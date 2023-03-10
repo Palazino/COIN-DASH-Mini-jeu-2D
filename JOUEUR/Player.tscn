@@ -1,0 +1,57 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/player/run/player-run-1.png" type="Texture" id=1]
+[ext_resource path="res://JOUEUR/Player.gd" type="Script" id=2]
+[ext_resource path="res://assets/player/hurt/player-hurt-2.png" type="Texture" id=3]
+[ext_resource path="res://assets/player/idle/player-idle-2.png" type="Texture" id=4]
+[ext_resource path="res://assets/player/hurt/player-hurt-1.png" type="Texture" id=5]
+[ext_resource path="res://assets/player/idle/player-idle-1.png" type="Texture" id=6]
+[ext_resource path="res://assets/player/idle/player-idle-3.png" type="Texture" id=7]
+[ext_resource path="res://assets/player/idle/player-idle-4.png" type="Texture" id=8]
+[ext_resource path="res://assets/player/run/player-run-2.png" type="Texture" id=9]
+[ext_resource path="res://assets/player/run/player-run-5.png" type="Texture" id=10]
+[ext_resource path="res://assets/player/run/player-run-6.png" type="Texture" id=11]
+[ext_resource path="res://assets/player/run/player-run-3.png" type="Texture" id=12]
+[ext_resource path="res://assets/player/run/player-run-4.png" type="Texture" id=13]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "idle",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "hurt",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "run",
+"speed": 8.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 12, 17 )
+
+[node name="Player" type="Area2D"]
+position = Vector2( 114, 62 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 200
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 5.67188, 5.5 )
+scale = Vector2( 1.34375, 1.34375 )
+frames = SubResource( 1 )
+animation = "idle"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 3, 11 )
+shape = SubResource( 2 )
+
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
